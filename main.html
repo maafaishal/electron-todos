@@ -1,0 +1,46 @@
+<head>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <section class="top-section">
+    <h1 class="ts-title">M A Faishal To-Do List</h1>
+    <p class="ts-date">Monday, 22 June 2020</p>
+  </section>
+  <section class="list-section">
+    <div id="todo-list"></div>
+    <button type="button" onclick="openAddFunc()" class="list-btn">New Todo</button>
+  </section>
+
+  <script>
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+    const list = document.getElementById('todo-list');
+
+    ipcRenderer.on('todo:add', (event, todo) => {
+      const div = document.createElement('div');
+      const pDetail = document.createElement('p');
+      const pDate = document.createElement('p');
+      const text = document.createTextNode(todo);
+      const date = document.createTextNode('Today       01:00');
+
+      div.setAttribute("class", "list-wrapper");
+      pDetail.setAttribute("class", "list-text");
+      pDate.setAttribute("class", "list-date");
+
+      pDetail.appendChild(text);
+      pDate.appendChild(date);
+      div.appendChild(pDetail);
+      div.appendChild(pDate);
+      list.appendChild(div);
+    });
+
+    ipcRenderer.on('todo:clear', () => {
+      list.innerHTML = '';
+    });
+    
+    function openAddFunc() {
+      console.log('here')
+      ipcRenderer.send('todo:openAdd');
+    }
+  </script>
+</body>

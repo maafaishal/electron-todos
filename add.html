@@ -1,0 +1,22 @@
+<head>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <form class="list-form">
+    <div>
+      <textarea id="list-textarea-input" class="list-textarea" rows="4"></textarea>
+    </div>
+    <button class="list-form-btn" type="submit">Add</button>
+  </form>
+  <script>
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+
+    document.querySelector('form').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const { value } = document.getElementById('list-textarea-input');
+      ipcRenderer.send('todo:add', value);
+    });
+  </script>
+</body>
