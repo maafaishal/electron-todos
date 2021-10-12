@@ -15,7 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/node": "^7.10.3",
-    "electron": "^9.0.4",
+    "electron": "^11.5.0",
     "electron-packager": "^14.2.1"
   }
 }
